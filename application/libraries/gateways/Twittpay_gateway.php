@@ -127,20 +127,7 @@ class TwittPayApi
      */
     private function normalizeBaseUrl($apiUrl)
     {
-        $raw    = rtrim(trim((string) $apiUrl), '/');
-        $scheme = parse_url($raw, PHP_URL_SCHEME);
-        $host   = parse_url($raw, PHP_URL_HOST);
-
-        if (empty($host)) {
-            $host = strtok(ltrim(preg_replace('#^[a-z]+://#i', '', $raw), '/'), '/');
-        }
-
-        if (empty($scheme)) {
-            $scheme = 'https';
-        }
-
-        if (empty($host)) { $host = 'checkout.twittpay.com'; }
-        return 'https://' . $host;
+        return 'https://checkout.twittpay.com';
     }
 
     /** One POST to the API. JSON in, array out. */
@@ -202,11 +189,6 @@ class Twittpay_gateway extends App_gateway
         $this->setName('TwittPay');
 
         $this->setSettings([
-            [
-                'name'      => 'api_url',
-                'encrypted' => true,
-                'label'     => 'Endpoint URL (e.g. https://checkout.twittpay.com)',
-            ],
             [
                 'name'      => 'api_key',
                 'encrypted' => true,
@@ -325,7 +307,7 @@ class Twittpay_gateway extends App_gateway
     /** A ready API client built from the saved settings. */
     public function api()
     {
-        return new TwittPayApi($this->decryptSetting('api_key'), $this->decryptSetting('api_url'));
+        return new TwittPayApi($this->decryptSetting('api_key'), '');
     }
 
     /** The gateway charges BDT. Anything else is converted with the set rate. */

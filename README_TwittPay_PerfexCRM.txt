@@ -16,9 +16,6 @@
    1. Setup -> Settings -> Payment Gateways.
    2. Open the "TwittPay" tab and fill in:
 
-        Endpoint URL      your own gateway address, e.g.
-                          https://checkout.twittpay.com
-                          (the API host shown on your gateway's developer page)
 
         Brand Key           from your gateway dashboard, under Brands
 
@@ -49,8 +46,6 @@
      records stays in the invoice's currency.
 
  WHAT TO WATCH
-   * The Endpoint URL is your API host. Pasting the whole endpoint or a trailing
-     /api is fine - only the scheme and host are used.
    * The webhook URL must be reachable from the internet. Your gateway's server
      calls it directly.
    * Refunds are not done through the API. Refund on the gateway side, then
